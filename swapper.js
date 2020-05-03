@@ -18,7 +18,7 @@ class Swapper{
     let offset = scl/32;
 
     let sx = this.x*scl + xoffset;
-    let sy = yd + yoffset; 
+    let sy = yd; 
 
     if(twitch > mt/2){
       image(cursorTexture,sx,sy,scl,scl);
@@ -61,23 +61,21 @@ class Swapper{
         if(this.x > 0)
           this.x--;
         return;
-    }    
-    
+    }
   }
-
 }
 
 function keyPressed(){
-  if(keyIsDown(79)){
+  if(keyIsDown(38)){
     swapper.move(0);
   }
-  if(keyIsDown(186)){
+  if(keyIsDown(39)){
     swapper.move(1);
   }
-  if(keyIsDown(76)){
+  if(keyIsDown(40)){
     swapper.move(2);
   }
-  if(keyIsDown(75)){
+  if(keyIsDown(37)){
     swapper.move(3);
   }
   if(keyIsDown(67)){//Swap

@@ -71,7 +71,7 @@ function grid() { //Draw all grid
         skip = 1;
         fill(colors[0].r, colors[0].g, colors[0].b);
         noStroke();
-        rect(x+xoffset, y+yoffset, 2 * scl, scl);
+        rect(x+xoffset, y, 2 * scl, scl);
         if (list[i][j + 1].color != 0) // DRAW IF FULL
           blockTexture( x - (5 - sCounter) * scl / 4 + scl, y,i,j+1);
         if (list[i][j].color != 0)//DRAW IF FULL
@@ -97,7 +97,7 @@ function grid() { //Draw all grid
       } else if (list[i][j].color === 0) {// DRAW IF EMPTY
         fill(colors[list[i][j].color].r, colors[list[i][j].color].g, colors[list[i][j].color].b);
         noStroke();
-        rect(x+xoffset,y+yoffset, scl, scl);
+        rect(x+xoffset,y, scl, scl);
       } else { // DRAW IF FULL
         blockTexture(x,y,i,j);
         count(j,i);
@@ -106,17 +106,17 @@ function grid() { //Draw all grid
   }
   fill(10, 150);
   noStroke();
-  rect(0+xoffset, y * scl - lift+yoffset, x * scl, lift);
+  rect(0+xoffset, y * scl - lift, x * scl, lift);
 
   fill(50);
   noStroke();
-  rect(0+xoffset, y * scl+yoffset, x * scl, scl);
+  rect(0+xoffset, y * scl, x * scl, scl);
 
   fill(50);
   noStroke();
-  rect(0+xoffset, -scl+yoffset, x * scl, scl);
+  rect(0+xoffset, -scl, x * scl, scl);
 
-  image(frame, xoffset-10,yoffset-10,x*scl+20,y*scl+20);
+  //image(frame, xoffset-10,-10,x*scl+20,y*scl+20);
 }
 
 function up() {//Pushes all blocks up
@@ -166,7 +166,7 @@ function check() {// Checks for blocks that should clear
         for (let k = i1; k < i2; k++) {
           if(p) block = list[i][k]; else block = list[k][j];
           if (block.color === cl && block.land < 2 * landAnimation / 3 && block.dropping === 0 && block.looney === 0 && (block.cleared === 0 || block.cleared === clearSpeed)) {
-            if (block.dir === p)
+            if (block.dir === 0)
               double++;
             if(block.combo === 1)
               com1 = 1;
@@ -181,7 +181,7 @@ function check() {// Checks for blocks that should clear
             else
               block = list[k][j];
             block.cleared = clearSpeed;
-            block.dir = !p;
+            block.dir = 0;
           }
           clear = 1;
           sum += counter - double;
@@ -217,11 +217,11 @@ function check() {// Checks for blocks that should clear
   if (sum > 3)
     stop = 2*max/5;
   if (sum > 2){
-    counters[0] = new Combo(width / 2, height / 2, sum,0);
+    counters[0] = new Combo(width / 4, height / 2, sum,0);
     score += db.combo[sum-3];
     if (combo > 0){
       score += db.chain[combo-1];
-      counters[1] = new Combo(width/2-scl*2,height/2-3*scl/16,combo+chain,1);
+      counters[1] = new Combo(width / 3-scl*3,height/2-3*scl/16,combo+chain,1);
       stop = max;
       chain++;
     }else
@@ -279,7 +279,6 @@ function blockTexture(x,y,i,j){//Drawing function of blocks
   let cleared = list[i][j].cleared;
   let combo = list[i][j].combo;
   x += xoffset;
-  y += yoffset;
   
   if (cleared > 3 * clearSpeed / 7) {//DRAW BACKGROUND
     if (cleared % 2 === 0) {
@@ -437,5 +436,5 @@ function showScore(){
   fill(255, 75);
   textAlign(CENTER, CENTER);
   textSize(scl);
-  text(score,width/2, scl/2);
+  text(score,width/4, 2*scl);
 }

@@ -3,11 +3,10 @@ let scl = 17 * 3;//Scale of blocks, multiples of 17 since block textures are 17x
 let x = 6;
 let y = 12;
 
-let xoffset = scl * 7;
-let yoffset = scl * 2;
+let xoffset = scl * 6;
 
-let width = scl * x + 2*xoffset;
-let height = scl * y + 2*yoffset;
+let width = scl * x + xoffset;
+let height = scl * y;
 
 var list = new Array(y + 1);//2D array that holds all blocks
 var choices = new Array(1, 2, 3, 4, 5);//Color choice Array
