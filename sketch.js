@@ -44,6 +44,9 @@ function draw() {
   timers();
   numbers();//Draw combo/clear numbers
   showScore();
+
+  if (helpTimer > 0)
+    showHelp();
 }
 
 function createList() {//Creates 2d Array for blocks
@@ -115,8 +118,6 @@ function grid() { //Draw all grid
   fill(50);
   noStroke();
   rect(0+xoffset, -scl, x * scl, scl);
-
-  //image(frame, xoffset-10,-10,x*scl+20,y*scl+20);
 }
 
 function up() {//Pushes all blocks up
@@ -402,8 +403,6 @@ function loadTextures(){
   colors[5][0] = loadImage('assets/purple1.png');
   colors[5][1] = loadImage('assets/purple2.png');
 
-  frame = loadImage('assets/frame.png');
-
   cursorTexture = loadImage('assets/cursor.png');
 }
 
@@ -437,4 +436,14 @@ function showScore(){
   textAlign(CENTER, CENTER);
   textSize(scl);
   text(score,width/4, 2*scl);
+}
+
+function showHelp(){
+  helpTimer--;
+  strokeWeight(2);
+  stroke(0);
+  fill(255);
+  textAlign(CENTER,CENTER);
+  textSize(scl/2);
+  text('Move with Arrow Keys\n Swap with C\nSkip up with X',width/4,(y-1)*scl);
 }

@@ -61,4 +61,4 @@ let dropSoundCD = dSCDMax;//Drop sound cooldown so that it doesn't get spammed
 
 let score = 0;
 
-let frame;
+let helpTimer = 1000;
